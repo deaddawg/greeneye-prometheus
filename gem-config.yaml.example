@@ -1,0 +1,23 @@
+---
+1110001:
+  location: "House"
+  channels:
+    # Channel Number: {<<any tags here are passed through to prom guage>>}
+    #1: {"circuit_amps": 100, "panel_slot": 0, "type": "Lugs", "circuit_desc": "Main Phase 1"}
+    #2: {"circuit_amps": 100, "panel_slot": 0, "type": "Lugs", "circuit_desc": "Main Phase 2"}
+    3: {"circuit_amps": 30, "panel_slot": 1, "type": "STD", "circuit_desc": "Dryer Phase 1"}
+    4: {"circuit_amps": 50, "panel_slot": 2, "type": "STD", "circuit_desc": "Oven Phase 1"}
+    5: {"circuit_amps": 30, "panel_slot": 3, "type": "STD", "circuit_desc": "Dryer Phase 2"}
+    6: {"circuit_amps": 50, "panel_slot": 4, "type": "STD", "circuit_desc": "Oven Phase 2"}
+    7: {"circuit_amps": 20, "panel_slot": 5, "type": "STD", "circuit_desc": "Bathrooms"}
+    8: {"circuit_amps": 20, "panel_slot": 6, "type": "AFCI", "circuit_desc": "Bedroom 1"}
+    9: {"circuit_amps": 20, "panel_slot": 7, "type": "AFCI", "circuit_desc": "Living Room"}
+    10: {"circuit_amps": 20, "panel_slot": 8, "type": "AFCI", "circuit_desc": "Bedroom 2+3"}
+    11: {"circuit_amps": 15, "panel_slot": 9, "type": "STD", "circuit_desc": "Kitchen and Dining Lights"}
+    #12: {"circuit_amps": 20, "panel_slot": 10, "type": "STD", "circuit_desc": "Unused"}
+    13: {"circuit_amps": 20, "panel_slot": 11, "type": "AFCI", "circuit_desc": "Kitchen Counter 1"}
+    14: {"circuit_amps": 20, "panel_slot": 12, "type": "AFCI", "circuit_desc": "Kitchen Counter 2"}
+    15: {"circuit_amps": 20, "panel_slot": 13, "type": "GFCI", "circuit_desc": "Outdoor Plugs"}
+    16: {"circuit_amps": 20, "panel_slot": 14, "type": "AFCI", "circuit_desc": "Living Room"}
+    17: {"circuit_amps": 20, "panel_slot": 15, "type": "GFCI", "circuit_desc": "Garage"}
+    18: {"circuit_amps": 15, "panel_slot": 16, "type": "AFCI/GFCI", "circuit_desc": "Fridge"}
