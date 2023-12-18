@@ -7,7 +7,8 @@ import sys
 import yaml
 
 from greeneye.monitor import Monitors
-from aioprometheus import Counter, Gauge, Service
+from aioprometheus import Counter, Gauge
+from aioprometheus.service import Service
 
 DEFAULT_PORT_GEM = 1461
 DEFAULT_PORT_PROM = 1462
@@ -24,21 +25,21 @@ def register_prom_stats(prom_svr):
     gem_packets_rcvd = Counter(
         "gem_packets_rcvd", "Number of packets", const_labels=DEFAULT_LABELS
     )
-    prom_svr.register(gem_packets_rcvd)
+    prom_svr.gem_packets_rcvd = gem_packets_rcvd
     stats['gem_packets_rcvd'] = gem_packets_rcvd
 
     # Gauge for voltage reading on GEM
     gem_ac_voltage = Gauge(
         "gem_ac_voltage", "AC Voltage", const_labels=DEFAULT_LABELS
     )
-    prom_svr.register(gem_ac_voltage)
+    prom_svr.gem_ac_voltage = gem_ac_voltage
     stats['gem_ac_voltage'] = gem_ac_voltage
 
     # Gauge for circuit wattage reading on GEM
     gem_ac_power = Gauge(
         "gem_ac_power", "AC Watts", const_labels=DEFAULT_LABELS
     )
-    prom_svr.register(gem_ac_power)
+    prom_svr.gem_ac_power = gem_ac_power
     stats['gem_ac_power'] = gem_ac_power
 
     return stats
@@ -49,9 +50,9 @@ async def gem(gem_port, prom_svr, prom_port, config):
     await prom_svr.start(addr="0.0.0.0", port=prom_port)
     LOG.info(f"Serving prometheus metrics on: {prom_svr.metrics_url}")
 
-    monitors = Monitors()
-    monitors.add_listener(partial(on_new_monitor, stats, config))
-    async with await monitors.start_server(gem_port):
+    async with Monitors() as monitors:
+        monitors.add_listener(partial(on_new_monitor, stats, config))
+        await monitors.start_server(gem_port)
         while True:
             try:
                 await asyncio.sleep(60)
