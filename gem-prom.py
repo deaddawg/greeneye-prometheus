@@ -80,8 +80,9 @@ def update_stats(stats, config, monitor):
     gem_tags = {"serial": monitor.serial_number, "location": location}
 
     # Log voltage reading
-    stats['gem_ac_voltage'].set(gem_tags, monitor.voltage)
-    LOG.debug(f"GEM {monitor.serial_number}: Voltage: {monitor.voltage}")
+    voltage =  monitor.voltage_sensor.voltage
+    stats['gem_ac_voltage'].set(gem_tags, voltage)
+    LOG.debug(f"GEM {monitor.serial_number}: Voltage: {voltage}")
 
     # Go over each channel
     channel_config = config[monitor.serial_number].get('channels')
